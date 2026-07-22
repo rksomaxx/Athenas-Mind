@@ -1,17 +1,10 @@
-// Captura o nome do arquivo PDF e o título amigável da URL
+// Captura os parâmetros da URL
 const urlParams = new URLSearchParams(window.location.search);
 const pdfNome = urlParams.get('pdf') || 'fragmentos.pdf';
-const titulo = urlParams.get('titulo') || pdfNome.replace('.pdf', '');
-
-// Elementos do DOM
-const tituloLivro = document.getElementById('tituloLivro');
-
-// Define o título completo no cabeçalho do leitor
-if (tituloLivro) {
-  tituloLivro.textContent = decodeURIComponent(titulo);
-}
+const titulo = urlParams.get('titulo') || pdfNome.replace('.pdf', '').replace(/-/g, ' ');
 
 const urlPDF = `../livros/${pdfNome}`;
+
 // Estado do Leitor
 let pdfDoc = null;
 let pageNum = 1;
@@ -26,24 +19,24 @@ const paginaAtualInput = document.getElementById('paginaAtualInput');
 const paginaInfo = document.getElementById('paginaInfo');
 const progressBar = document.getElementById('progressBar');
 
-// Atualiza o título baseado no arquivo
-tituloLivro.textContent = pdfNome.replace('.pdf', '').replace(/-/g, ' ');
+// Define o título no cabeçalho
+if (tituloLivro) {
+  tituloLivro.textContent = decodeURIComponent(titulo);
+}
 
 /**
- * Renderiza a página solicitada no Canvas com nitidez para telas Retina/Mobile
+ * Renderiza a página solicitada no Canvas
  */
 function renderPage(num) {
   pageRendering = true;
 
   pdfDoc.getPage(num).then((page) => {
-    // Limpa a página anterior
     viewer.innerHTML = '';
 
     const viewport = page.getViewport({ scale: scale });
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
 
-    // Ajuste de DPI para renderização super nítida
     const outputScale = window.devicePixelRatio || 1;
     canvas.width = Math.floor(viewport.width * outputScale);
     canvas.height = Math.floor(viewport.height * outputScale);
@@ -73,13 +66,12 @@ function renderPage(num) {
     });
   });
 
-  // Atualiza controles
   paginaAtualInput.value = num;
   atualizarProgresso(num);
 }
 
 /**
- * Fila de renderização caso o usuário troque de página rapidamente
+ * Fila de renderização
  */
 function queueRenderPage(num) {
   if (pageRendering) {
@@ -114,16 +106,14 @@ pdfjsLib.getDocument(urlPDF).promise.then((pdfDoc_) => {
   paginaInfo.textContent = `/ ${pdfDoc.numPages}`;
   paginaAtualInput.max = pdfDoc.numPages;
 
-  // Carrega a primeira página
   renderPage(pageNum);
 }).catch((err) => {
-  tituloLivro.textContent = "Erro ao carregar o livro";
+  if (tituloLivro) tituloLivro.textContent = "Erro ao carregar o livro";
   console.error("Erro ao carregar PDF:", err);
 });
 
 // ================= EVENTOS E CONTROLES =================
 
-// Botões de Navegação
 document.getElementById('paginaAnterior').addEventListener('click', paginaAnterior);
 document.getElementById('proximaPagina').addEventListener('click', proximaPagina);
 
@@ -138,7 +128,6 @@ document.getElementById('ultimaPagina').addEventListener('click', () => {
   queueRenderPage(pageNum);
 });
 
-// Digitar número da página
 paginaAtualInput.addEventListener('change', (e) => {
   const val = parseInt(e.target.value);
   if (val >= 1 && val <= pdfDoc.numPages) {
@@ -149,7 +138,6 @@ paginaAtualInput.addEventListener('change', (e) => {
   }
 });
 
-// Navegação por Teclado (Setas Esquerda / Direita)
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight' || e.key === 'Space') {
     proximaPagina();
@@ -158,20 +146,23 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Modo Escuro / Claro
 const btnModo = document.getElementById('btnModo');
-btnModo.addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-  btnModo.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
-});
+if (btnModo) {
+  btnModo.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    btnModo.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+  });
+}
 
-// Tela Cheia
-document.getElementById('btnTelaCheia').addEventListener('click', () => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
+const btnTelaCheia = document.getElementById('btnTelaCheia');
+if (btnTelaCheia) {
+  btnTelaCheia.addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
     }
-  }
-});
+  });
+}
