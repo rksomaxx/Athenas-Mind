@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <link rel="icon" type="image/png" href="capas/b.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Athena's Mind | Biblioteca Digital</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-light: #E8C96A;
+      --dark: #0D0C0A;
+      --dark2: #181610;
+      --cream: #F0E9D6;
+      --text: #C8BDA0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--dark);
+      color: var(--cream);
+      font-family: 'Jost', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      overflow-y: auto;
+    }
+
+    .hero {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 50px 20px;
+      flex: 1;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 1.1;
+    }
+
+    h1 span {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .line {
+      width: 100px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 30px auto;
+    }
+
+    .subtitle {
+      max-width: 700px;
+      margin: 0 auto;
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 16px;
+      font-weight: 300;
+    }
+
+    .cards {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    /* Flexbox interno para alinhar os botões na base */
+    .card {
+      background: linear-gradient(180deg, var(--dark2), #11110f);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: 18px;
+      padding: 45px 35px;
+      transition: all 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(201, 168, 76, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .icon {
+      font-size: 56px;
+      margin-bottom: 20px;
+    }
+
+    .card h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      font-weight: 400;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      color: var(--text);
+      line-height: 1.7;
+      margin-bottom: 35px;
+      font-size: 15px;
+      font-weight: 300;
+    }
+
+    /* Alinha o botão na parte inferior do card */
+    .botao {
+      margin-top: auto;
+      display: inline-block;
+      text-decoration: none;
+      color: var(--dark);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    .botao:hover {
+      opacity: 0.95;
+      transform: scale(1.02);
+      box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+    }
+
+    .status-breve {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      background: rgba(201, 168, 76, 0.05);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      border-radius: 10px;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: default;
+      user-select: none;
+    }
+
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      border-top: 1px solid rgba(201, 168, 76, 0.1);
+      background: var(--dark);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="hero">
+
+    <div class="eyebrow">
+      Biblioteca Digital
+    </div>
+
+    <h1>
+      <span>Athena’s</span> Mind
+    </h1>
+
+    <div class="line"></div>
+
+    <p class="subtitle">
+      Uma coleção de livros, cursos e materiais de estudo
+      cuidadosamente organizados para expandir seus conhecimentos.
+    </p>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="icon">📚</div>
+        <h2>Livros</h2>
+        <p>
+          Explore a biblioteca digital com obras técnicas,
+          literatura, referências e materiais para consulta.
+        </p>
+        <a href="livros.html" class="botao">
+          Acessar Biblioteca
+        </a>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎓</div>
+        <h2>Estudos</h2>
+        <p>
+          Acesse cursos completos, apostilas interativas
+          e conteúdos desenvolvidos para aprendizado contínuo.
+        </p>
+        <div class="status-breve">
+          Em Breve
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    © 2026 Ricardo Soma · Desenvolvido no Visual Studio Code
+  </footer>
+
+</body>
+</html>

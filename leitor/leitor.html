@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Leitor</title>
+
+<link rel="stylesheet" href="../css/leitor.css">
+<link rel="icon" type="image/png" href="../capas/b.png">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+</script>
+
+</head>
+
+<body>
+
+<!-- ================= TOPO ================= -->
+
+<header class="topbar">
+
+<div class="left">
+
+<a href="../livros.html">
+
+← Biblioteca
+
+</a>
+
+</div>
+
+<div class="center">
+
+<h1 id="tituloLivro">
+
+Carregando...
+
+</h1>
+
+</div>
+
+<div class="right">
+
+<button id="btnModo">
+
+🌙
+
+</button>
+
+<button id="btnTelaCheia">
+
+⛶
+
+</button>
+
+</div>
+
+</header>
+
+<!-- ================= ÁREA DO PDF ================= -->
+
+<main id="viewerContainer">
+
+<div id="viewer"></div>
+
+</main>
+
+<!-- ================= CONTROLES ================= -->
+
+<footer class="footer">
+
+    <button id="primeiraPagina">
+        ⏮
+    </button>
+
+    <button id="paginaAnterior">
+        ◀
+    </button>
+
+    <div class="page-control">
+
+        <input
+            type="number"
+            id="paginaAtualInput"
+            min="1"
+            value="1"
+        >
+
+        <span id="paginaInfo">
+            / 1
+        </span>
+
+    </div>
+
+    <button id="proximaPagina">
+        ▶
+    </button>
+
+    <button id="ultimaPagina">
+        ⏭
+    </button>
+
+</footer>
+
+<!-- ================= PROGRESSO ================= -->
+
+<div class="progressContainer">
+
+<div id="progressBar"></div>
+
+</div>
+
+<script src="../js/leitor.js"></script>
+
+</body>
+
+</html>

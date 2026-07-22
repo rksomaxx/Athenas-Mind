@@ -1,0 +1,154 @@
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C96A;
+  --dark: #0D0C0A;
+  --dark2: #181610;
+  --cream: #F0E9D6;
+  --text: #C8BDA0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--dark);
+  color: var(--cream);
+  font-family: 'Jost', sans-serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Modo Claro opcional */
+body.light-mode {
+  background-color: #f4f1ea;
+  color: #111;
+}
+
+body.light-mode .topbar,
+body.light-mode .footer {
+  background: #e8e2d5;
+  border-color: #ccc;
+}
+
+/* TOPBAR */
+.topbar {
+  height: 60px;
+  background: var(--dark2);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 10;
+}
+
+.topbar a {
+  color: var(--gold);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.topbar h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--cream);
+  text-transform: capitalize;
+}
+
+.topbar button, .footer button {
+  background: transparent;
+  border: none;
+  color: var(--gold);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+
+.topbar button:hover, .footer button:hover {
+  background: rgba(201, 168, 76, 0.15);
+}
+
+/* CONTAINER DO CANVAS/PDF */
+#viewerContainer {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: var(--dark);
+}
+
+#viewer {
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+#viewer canvas {
+  display: block;
+  max-width: 100%;
+  height: auto !important;
+}
+
+/* CONTROLES / FOOTER */
+.footer {
+  height: 60px;
+  background: var(--dark2);
+  border-top: 1px solid rgba(201, 168, 76, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  z-index: 10;
+}
+
+.page-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text);
+  font-size: 14px;
+}
+
+.page-control input {
+  width: 50px;
+  padding: 6px;
+  background: var(--dark);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 6px;
+  color: var(--gold);
+  text-align: center;
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  outline: none;
+}
+
+/* BARRA DE PROGRESSO */
+.progressContainer {
+  width: 100%;
+  height: 4px;
+  background: rgba(201, 168, 76, 0.1);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transition: width 0.3s ease;
+}
