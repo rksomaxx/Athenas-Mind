@@ -1,9 +1,17 @@
-// Captura o nome do PDF vindo da URL (ex: fragmentos.pdf)
+// Captura o nome do arquivo PDF e o título amigável da URL
 const urlParams = new URLSearchParams(window.location.search);
 const pdfNome = urlParams.get('pdf') || 'fragmentos.pdf';
-// Como o leitor.html está dentro de /leitor/, o "../" sai da pasta leitor e entra na /livros/
-const urlPDF = `../livros/${pdfNome}`;
+const titulo = urlParams.get('titulo') || pdfNome.replace('.pdf', '');
 
+// Elementos do DOM
+const tituloLivro = document.getElementById('tituloLivro');
+
+// Define o título completo no cabeçalho do leitor
+if (tituloLivro) {
+  tituloLivro.textContent = decodeURIComponent(titulo);
+}
+
+const urlPDF = `../livros/${pdfNome}`;
 // Estado do Leitor
 let pdfDoc = null;
 let pageNum = 1;
